@@ -4,10 +4,16 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
 MyApp({super.key});
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
   var a = 1;
+  // var name = '연락처앱';
+  var name = ['대니얼', '팀', '스티븐'];
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +23,12 @@ MyApp({super.key});
         floatingActionButton: FloatingActionButton(
           child: Text(a.toString()),
           onPressed: () {
-            print(a);
-            a++;
+            setState(() {
+              a++;
+            });
           },
         ),
-        appBar: AppBar(),
+        appBar: AppBar( title: Text( '연락처앱' ) ),
         bottomNavigationBar: BottomAppBar(),
         body: ListView.builder(
             itemCount: 300,
