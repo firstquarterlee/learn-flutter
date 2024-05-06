@@ -1,48 +1,52 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+      MaterialApp(
+        home: MyApp()
+  ));
 }
 
 class MyApp extends StatefulWidget {
 MyApp({super.key});
   @override
-  State<MyApp> createState() => _MyAppState();
+  State createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  var a = 1;
-  // var name = '연락처앱';
+class _MyAppState extends State {
   var name = ['대니얼', '팀', '스티븐'];
+  var like = [0, 0, 0];
 
   @override
-  Widget build(BuildContext context) {
+  build(context) {
 
-    return MaterialApp(
-      home: Scaffold(
+    return Scaffold(
         floatingActionButton: FloatingActionButton(
-          child: Text(a.toString()),
           onPressed: () {
-            setState(() {
-              a++;
+            print(context.findAncestorWidgetOfExactType<MaterialApp>());
+            showDialog(context: context, builder: (context) {
+              return Dialog(child: Text('안녕'));
             });
           },
         ),
-        appBar: AppBar( title: Text( '연락처앱' ) ),
-        bottomNavigationBar: BottomAppBar(),
+        appBar: AppBar(),
         body: ListView.builder(
-            itemCount: 300,
-            itemBuilder: (c, i) {
-              print(i);
+            itemCount: 3,
+            itemBuilder: (context, i) {
               return ListTile(
+                title: Text(name[i]),
+                trailing: ElevatedButton(child: Text('좋아요'), onPressed: () {
+                  setState(() {
+                    like[i]++;
+                  });
+                },),
                 leading: Image.asset('profile.png'),
-                title: Text('Daniel'),
               );
             },
         ),
 
-       )
-      );
+       );
+
 
   }
 }
